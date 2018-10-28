@@ -36,7 +36,7 @@ let jcGallery = (function jcGallery(inputOptions) {
   }
 
   function loadOptions(gallery, inputOptions) {
-    options = {
+    let options = {
       aspectRatio: gallery.dataset.aspectRatio ? gallery.dataset.aspectRatio : null,
       gap: gallery.dataset.gap ? gallery.dataset.gap : null,
       gridType: gallery.dataset.gridType ? gallery.dataset.gridType : null,
@@ -45,7 +45,7 @@ let jcGallery = (function jcGallery(inputOptions) {
       maxElementWidth: gallery.dataset.maxElementWidth ? gallery.dataset.maxElementWidth : null,
       maxElementRowSpan: gallery.dataset.maxElementRowSpan ? gallery.dataset.maxElementRowSpan : null,
       maxElementColumnSpan: gallery.dataset.maxElementColumnSpan ? gallery.dataset.maxElementColumnSpan : null
-    }
+    };
 
     if (!options.aspectRatio) {
       options.aspectRatio = inputOptions && inputOptions.aspectRatio ? inputOptions.aspectRatio : defaultAspectRatio;
@@ -111,7 +111,7 @@ let jcGallery = (function jcGallery(inputOptions) {
       return;
     }
 
-    elementHeight = calculateElementHeight(gallery, numberOfColumns, options.aspectRatio, options.gap);
+    let elementHeight = calculateElementHeight(gallery, numberOfColumns, options.aspectRatio, options.gap);
     initializeGrid(gallery, numberOfColumns, elementHeight, options.gap);
     displayElements(elements, numberOfColumns, options.maxElementRowSpan, options.maxElementColumnSpan, options.gridType, options.hoverEffect);
   }
@@ -119,8 +119,8 @@ let jcGallery = (function jcGallery(inputOptions) {
   function initializeGrid(gallery, numberOfColumns, elementHeight, gap) {
     let gridTemplateColumns = "";
 
-    for(i = 0; i < numberOfColumns; i++) {
-      gridTemplateColumns += "auto "
+    for(let i = 0; i < numberOfColumns; i++) {
+      gridTemplateColumns += "auto ";
     }
 
     gallery.style.gridTemplateColumns = gridTemplateColumns;
@@ -162,7 +162,7 @@ let jcGallery = (function jcGallery(inputOptions) {
     if (numberOfColumns - currentColumnIndex >= maxElementColumnSpan - 1) {
       columnSpan = Math.floor(Math.random() * maxElementColumnSpan) + 1;
 
-      for (i = 0; i < columnSpan; i++) {
+      for (let i = 0; i < columnSpan; i++) {
         if (rowIndexes[currentColumnIndex + i - 1] != rowIndexes[currentColumnIndex - 1]) {
           columnSpan = i;
 
@@ -174,7 +174,7 @@ let jcGallery = (function jcGallery(inputOptions) {
     element.style.gridRow = rowIndexes[currentColumnIndex - 1] + " / span " + rowSpan;
     element.style.gridColumn = currentColumnIndex + " / span " + columnSpan;
 
-    for (i = 0; i < columnSpan; i++) {
+    for (let i = 0; i < columnSpan; i++) {
       rowIndexes[currentColumnIndex - 1 + i] += rowSpan;
     }
 
@@ -192,8 +192,8 @@ let jcGallery = (function jcGallery(inputOptions) {
   }
 
   function displayPlayButton(element) {
-    let playButton = document.createElement('div')
-    let playButtonIcon = document.createElement('span')
+    let playButton = document.createElement('div');
+    let playButtonIcon = document.createElement('span');
 
     playButtonIcon.classList.add("jc-gallery-play-button");
 
@@ -225,8 +225,8 @@ let jcGallery = (function jcGallery(inputOptions) {
   }
 
   function displayMediaViewer(element) {
-    let mediaViewer = document.createElement('div')
-    let loader = document.createElement('div')
+    let mediaViewer = document.createElement('div');
+    let loader = document.createElement('div');
 
     mediaViewer.id = "jc-gallery-media-viewer";
     mediaViewer.classList.add("jc-gallery-background");
@@ -244,11 +244,11 @@ let jcGallery = (function jcGallery(inputOptions) {
 
   function displayMedia(element, elements, mediaViewer) {
     let newMedia = null;
-    let mediaContainer = document.createElement('div')
+    let mediaContainer = document.createElement('div');
 
     mediaContainer.classList.add("jc-gallery-media-container");
 
-    currentMedia = document.getElementById("jc-gallery-media");
+    let currentMedia = document.getElementById("jc-gallery-media");
 
     if (currentMedia) {
       mediaViewer.removeChild(currentMedia);
@@ -263,7 +263,7 @@ let jcGallery = (function jcGallery(inputOptions) {
 
     newMedia.src = element.dataset.src;
 
-    mediaContainer.appendChild(newMedia)
+    mediaContainer.appendChild(newMedia);
     mediaContainer.id = "jc-gallery-media";
 
     mediaViewer.appendChild(mediaContainer);
@@ -277,7 +277,7 @@ let jcGallery = (function jcGallery(inputOptions) {
   }
 
   function displayPreviousButton(element, elements, mediaViewer) {
-    let previousButton = document.createElement('div')
+    let previousButton = document.createElement('div');
 
     previousButton.classList.add("jc-gallery-button");
     previousButton.classList.add("jc-gallery-previous-button");
@@ -290,7 +290,7 @@ let jcGallery = (function jcGallery(inputOptions) {
   }
 
   function displayNextButton(element, elements, mediaViewer) {
-    let nextButton = document.createElement('div')
+    let nextButton = document.createElement('div');
     nextButton.classList.add("jc-gallery-button");
     nextButton.classList.add("jc-gallery-next-button");
     nextButton.classList.add("jc-gallery-navigation-button");
@@ -302,7 +302,7 @@ let jcGallery = (function jcGallery(inputOptions) {
   }
 
   function displayCloseButton(mediaViewer) {
-    let closeButton = document.createElement('div')
+    let closeButton = document.createElement('div');
 
     closeButton.classList.add("jc-gallery-button");
     closeButton.classList.add("jc-gallery-close-button");
@@ -350,13 +350,13 @@ let jcGallery = (function jcGallery(inputOptions) {
       if (previousNumberOfColumns != numberOfColumns && numberOfColumns > 0) {
         displayGallery(gallery, numberOfColumns, options);
       }
-    })
+    });
   }
 
   function registerOnElementClickListener(element, elements) {
     element.addEventListener('click', function(event) {
       openElement(element, elements);
-    })
+    });
   }
 
   function registerOnPreviousClickListener(button, element, elements) {
@@ -373,7 +373,7 @@ let jcGallery = (function jcGallery(inputOptions) {
       let previousElement = elements.item(previousIndex);
 
       openElement(previousElement, elements);
-    })
+    });
   }
 
   function registerOnNextClickListener(button, element, elements) {
@@ -390,7 +390,7 @@ let jcGallery = (function jcGallery(inputOptions) {
       let previousElement = elements.item(previousIndex);
 
       openElement(previousElement, elements);
-    })
+    });
   }
 
   function registerOnVideoMouseOverListener(element, playButton, media) {
@@ -398,7 +398,7 @@ let jcGallery = (function jcGallery(inputOptions) {
       playButton.classList.add("jc-gallery-hidden");
 
       media.play();
-    })
+    });
   }
 
   function registerOnVideoMouseOutListener(element, playButton, media) {
@@ -406,7 +406,7 @@ let jcGallery = (function jcGallery(inputOptions) {
       playButton.classList.remove("jc-gallery-hidden");
 
       media.pause();
-    })
+    });
   }
 
   function registerOnCloseEventListeners(element, background) {
@@ -414,13 +414,13 @@ let jcGallery = (function jcGallery(inputOptions) {
       if (event.target.tagName != 'IMG' && event.target.tagName != 'VIDEO' && !event.target.classList.contains('jc-gallery-navigation-button')) {
         closeMediaViewer(element, background);
       }
-    })
+    });
 
     document.onkeydown = function(evt) {
       evt = evt || window.event;
       if (evt.keyCode == 27) {
         closeMediaViewer(element, background);
       }
-    }
+    };
   }
-})
+});
