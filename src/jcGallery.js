@@ -259,6 +259,7 @@ let jcGallery = (function jcGallery(inputOptions) {
     } else if (isVideo(element)) {
       newMedia = document.createElement("video");
       newMedia.controls = "controls";
+      newMedia.autoplay = "autoplay";
     }
 
     newMedia.src = element.dataset.src;
